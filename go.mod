@@ -1,4 +1,4 @@
-module github.com/kordar/async_task
+module github.com/kordar/async-task-starter
 
 go 1.16
 

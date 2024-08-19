@@ -1,18 +1,18 @@
-package async_task
+package async_task_starter
 
 import (
 	"github.com/kordar/gotask"
 	"github.com/spf13/cast"
 )
 
-type AsyncTaskModule struct {
+type AsyncTaskStarter struct {
 }
 
-func (m AsyncTaskModule) Name() string {
+func (m AsyncTaskStarter) Name() string {
 	return "async_task"
 }
 
-func (m AsyncTaskModule) Load(value interface{}) {
+func (m AsyncTaskStarter) Load(value interface{}) {
 	cfg := cast.ToStringMap(value)
 	workpoolsize := 3
 	if cfg["work_size"] != "" {
@@ -27,5 +27,5 @@ func (m AsyncTaskModule) Load(value interface{}) {
 	gotask.InitTaskHandle(workpoolsize, workpoolbuflen)
 }
 
-func (m AsyncTaskModule) Close() {
+func (m AsyncTaskStarter) Close() {
 }
