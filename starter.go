@@ -9,7 +9,7 @@ type AsyncTaskStarter struct {
 }
 
 func (m AsyncTaskStarter) Name() string {
-	return "async_task"
+	return "async_task_starter"
 }
 
 func (m AsyncTaskStarter) Load(value interface{}) {
