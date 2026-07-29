@@ -1,7 +1,9 @@
 package async_task_starter
 
 import (
-	logger "github.com/kordar/gologger"
+	"log/slog"
+	"os"
+
 	"github.com/kordar/gotask"
 	"github.com/spf13/cast"
 )
@@ -23,8 +25,8 @@ func (m AsyncTaskStarter) Load(value interface{}) {
 	cfg := cast.ToStringMapString(value)
 	id := cfg["id"]
 	if id == "" {
-		logger.Fatalf("[%s] the attribute id cannot be empty.", m.Name())
-		return
+		slog.Error("the attribute id cannot be empty", "module", m.Name())
+		os.Exit(1)
 	}
 
 	workpoolsize := 3
@@ -41,10 +43,10 @@ func (m AsyncTaskStarter) Load(value interface{}) {
 
 	if m.load != nil {
 		m.load(m.name, id, cfg)
-		logger.Debugf("[%s] triggering custom loader completion", m.Name())
+		slog.Debug("triggering custom loader completion", "module", m.Name())
 	}
 
-	logger.Infof("[%s] loading module '%s' successfully", m.Name(), id)
+	slog.Info("loading module successfully", "module", m.Name(), "id", id)
 }
 
 func (m AsyncTaskStarter) Close() {
